@@ -1,14 +1,18 @@
 package br.com.automacao.projetoQuarentena;
 
+import static org.testng.Assert.assertEquals;
+
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
-public class AbreNavegador extends BaseTest {
+public class AbreNavegadorEMC extends BaseTest {
 
 	@Test
 	public void deveAbrirNavegadorEMC() {
@@ -16,9 +20,11 @@ public class AbreNavegador extends BaseTest {
 		System.out.println("Estamos na página:" + url);
 		String titulo = driver.getTitle();
 		System.out.println("O título da página é:" + titulo);
+		;
+
 	}
 
-	@Test
+	/*@Test
 	public void deveInserirValorEMC() {
 		WebElement buscaTextEMC = driver.findElement(By.name("q"));
 		buscaTextEMC.sendKeys("Selenium");
@@ -52,12 +58,31 @@ public class AbreNavegador extends BaseTest {
 		WebDriverWait wait = new WebDriverWait(driver,15);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("explibutton")));
 		driver.findElement(By.id("explibutton")).click();
+	}
+	@Test
 	
-			}
+	public void loginfacebook () {
 				
-			
-		
-		
+		driver.get("https://www.facebook.com/");
+		driver.findElement(By.xpath("//*[@id=\"email\"]")).sendKeys("myown xpath");
+		driver.findElement(By.xpath("//*[@id='pass']")).sendKeys("hello");
+		driver.findElement(By.xpath("//*[@value='Entrar']")).click();		
+	}*/
+	@Test
+	
+	public void loginJulio() {
+		driver.get("http://www.juliodelima.com.br/taskit/");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.findElement(By.linkText("Sign in")).click();
+		WebElement formularioSignInBox = driver.findElement(By.id("signinbox"));
+		formularioSignInBox.findElement(By.name("login")).sendKeys("julio0001");
+		formularioSignInBox.findElement(By.name("password")).sendKeys("123456");
+		driver.findElement(By.linkText("SIGN IN")).click();		
+		WebElement me = driver.findElement(By.className("me"));
+		String textElementMe = me.getText();
+		assertEquals("Hi, Julio", textElementMe);
+	}
 	}
 
+	
 
